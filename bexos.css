@@ -1,0 +1,32 @@
+
+
+body {
+	background: #f2f6f8;
+	margin: 0;
+	padding: 0;
+}
+
+.image {
+	position:relative;
+	z-index:1;
+	top: 0;
+	left: 0;
+}
+
+#container {
+	display:inline-block;
+	margin: 0;
+	padding: 0;
+	background: grey;
+	position:relative;
+	top: 0;
+	left: 0;
+}
+
+#canvas {
+	position:absolute;
+	z-index:20;
+	top: 0;
+	left: 0;
+}
+
