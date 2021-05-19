@@ -68,8 +68,11 @@ function draw() {
 	ctx.globalCompositeOperation = 'destination-over';
 	ctx.clearRect(0, 0, img.width, img.height);
 	
+	ctx.lineWidth = 1;
 	ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+	ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
 	ctx.fillRect(x, y, x_ - x, y_ - y);
+	ctx.strokeRect(x, y, x_ - x, y_ - y);
 
 	text.textContent = Math.min(x, x_) + ' ' + Math.min(y, y_) + ' ' + Math.max(x, x_) + ' ' + Math.max(y, y_);
 }
