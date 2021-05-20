@@ -74,5 +74,9 @@ function draw() {
 	ctx.fillRect(x, y, x_ - x, y_ - y);
 	ctx.strokeRect(x, y, x_ - x, y_ - y);
 
-	text.value = Math.min(x, x_) + ' ' + Math.min(y, y_) + ' ' + Math.max(x, x_) + ' ' + Math.max(y, y_);
+	x_min = Math.min(x, x_)
+	x_max = Math.max(x, x_)
+	y_min = Math.min(y, y_)
+	y_max = Math.max(y, y_)
+	text.value = x_min + ' ' + y_min + ' ' + (x_max - x_min) + ' ' + (y_max - y_min);
 }
