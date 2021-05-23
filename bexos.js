@@ -89,7 +89,7 @@ function begin() {
     }
 
     ui_canvas.addEventListener('pointerdown', function (event) {
-        if (!event.shiftKey) {
+        if (event.buttons === 1 && !event.shiftKey) {
             box.p1.x = event.offsetX;
             box.p1.y = event.offsetY;
             box.p2.x = event.offsetX;
@@ -108,15 +108,6 @@ function begin() {
                 let r = Math.max(Math.abs(box.p1.x - event.offsetX), Math.abs(box.p1.y - event.offsetY));
                 box.p2.x = box.p1.x + r * Math.sign(event.offsetX - box.p1.x);
                 box.p2.y = box.p1.y + r * Math.sign(event.offsetY - box.p1.y);
-
-
-                // if (Math.abs(box.p1.x - event.offsetX) > Math.abs(box.p1.y - event.offsetY)) {
-                //     box.p2.x = event.offsetX;
-                //     box.p2.y = box.p1.y + box.width * Math.sign(event.offsetY - box.p1.y);
-                // } else {
-                //     box.p2.y = event.offsetY;
-                //     box.p2.x = box.p1.x + box.height * Math.sign(event.offsetX - box.p1.x);
-                // }
             } else {
                 box.p2.x = event.offsetX;
                 box.p2.y = event.offsetY;
@@ -137,7 +128,6 @@ function draw() {
     let ctx = canvas.getContext('2d');
     let text = document.getElementById('text');
 
-    ctx.globalCompositeOperation = 'destination-over';
     ctx.clearRect(0, 0, img.width, img.height);
 
     ctx.lineWidth = 1;
@@ -147,6 +137,15 @@ function draw() {
     if (box.p1.x !== box.p2.x || box.p1.y !== box.p2.y) {
         ctx.fillRect(0, 0, img.width, img.height);
         ctx.clearRect(box.xMin, box.yMin, box.width, box.height);
+        ctx.beginPath();
+        let r = Math.min(box.width, box.height) / 4;
+        let grad = ctx.createRadialGradient(box.midPoint.x, box.midPoint.y, 0, box.midPoint.x, box.midPoint.y, r);
+        grad.addColorStop(0, 'rgba(0, 0, 0, 0.2)');
+        grad.addColorStop(0.25, 'rgba(0, 0, 0, 0.1)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
+        ctx.fillStyle = grad
+        ctx.fillRect(box.xMin, box.yMin, box.width, box.height);
+        ctx.fill();
     }
 
 
